@@ -5,7 +5,7 @@ Trivial helm-based nginx operator
 Controllers inside the cluster detect the requested changes and take action to adjust the state. This occurs asynchronously, after you’ve submitted your new manifests.
 
 ## Operator
-Controller + API + CRD
+Operator = Controller + API + CRD
 
 The operator concept provides a way to monitor these applications using the same principles as regular controllers. An operator is simply a specialized controller that uses custom resources to move a specific application into the correct user-defined state.
 
