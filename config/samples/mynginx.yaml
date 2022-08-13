@@ -1,0 +1,6 @@
+apiVersion: charts.jkosik/v1alpha1
+kind: Nginx
+metadata:
+  name: nginx-sample
+spec:
+  replicaCount: 2

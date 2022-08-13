@@ -1,0 +1,493 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "charts.jkosik/v1alpha1",
+          "kind": "Nginx",
+          "metadata": {
+            "name": "nginx-sample"
+          },
+          "spec": {
+            "affinity": {},
+            "args": [],
+            "autoscaling": {
+              "enabled": false,
+              "maxReplicas": "",
+              "minReplicas": "",
+              "targetCPU": "",
+              "targetMemory": ""
+            },
+            "cloneStaticSiteFromGit": {
+              "branch": "",
+              "enabled": false,
+              "extraEnvVars": [],
+              "extraVolumeMounts": [],
+              "gitClone": {
+                "args": [],
+                "command": []
+              },
+              "gitSync": {
+                "args": [],
+                "command": []
+              },
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "pullSecrets": [],
+                "registry": "docker.io",
+                "repository": "bitnami/git",
+                "tag": "2.37.1-debian-11-r8"
+              },
+              "interval": 60,
+              "repository": ""
+            },
+            "clusterDomain": "cluster.local",
+            "command": [],
+            "commonAnnotations": {},
+            "commonLabels": {},
+            "containerPorts": {
+              "http": 8080,
+              "https": ""
+            },
+            "containerSecurityContext": {
+              "enabled": false,
+              "runAsNonRoot": true,
+              "runAsUser": 1001
+            },
+            "customLivenessProbe": {},
+            "customReadinessProbe": {},
+            "customStartupProbe": {},
+            "diagnosticMode": {
+              "args": [
+                "infinity"
+              ],
+              "command": [
+                "sleep"
+              ],
+              "enabled": false
+            },
+            "existingServerBlockConfigmap": "",
+            "extraContainerPorts": [],
+            "extraDeploy": [],
+            "extraEnvVars": [],
+            "extraEnvVarsCM": "",
+            "extraEnvVarsSecret": "",
+            "extraVolumeMounts": [],
+            "extraVolumes": [],
+            "fullnameOverride": "",
+            "global": {
+              "imagePullSecrets": [],
+              "imageRegistry": ""
+            },
+            "healthIngress": {
+              "annotations": {},
+              "enabled": false,
+              "extraHosts": [],
+              "extraPaths": [],
+              "extraRules": [],
+              "extraTls": [],
+              "hostname": "example.local",
+              "ingressClassName": "",
+              "path": "/",
+              "pathType": "ImplementationSpecific",
+              "secrets": [],
+              "selfSigned": false,
+              "tls": false
+            },
+            "hostAliases": [],
+            "hostIPC": false,
+            "hostNetwork": false,
+            "image": {
+              "debug": false,
+              "pullPolicy": "IfNotPresent",
+              "pullSecrets": [],
+              "registry": "docker.io",
+              "repository": "bitnami/nginx",
+              "tag": "1.23.1-debian-11-r6"
+            },
+            "ingress": {
+              "annotations": {},
+              "apiVersion": "",
+              "enabled": false,
+              "extraHosts": [],
+              "extraPaths": [],
+              "extraRules": [],
+              "extraTls": [],
+              "hostname": "nginx.local",
+              "ingressClassName": "",
+              "path": "/",
+              "pathType": "ImplementationSpecific",
+              "secrets": [],
+              "selfSigned": false,
+              "tls": false
+            },
+            "initContainers": [],
+            "kubeVersion": "",
+            "lifecycleHooks": {},
+            "livenessProbe": {
+              "enabled": true,
+              "failureThreshold": 6,
+              "initialDelaySeconds": 30,
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 5
+            },
+            "metrics": {
+              "enabled": false,
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "pullSecrets": [],
+                "registry": "docker.io",
+                "repository": "bitnami/nginx-exporter",
+                "tag": "0.10.0-debian-11-r21"
+              },
+              "podAnnotations": {},
+              "port": "",
+              "prometheusRule": {
+                "additionalLabels": {},
+                "enabled": false,
+                "namespace": "",
+                "rules": []
+              },
+              "resources": {
+                "limits": {},
+                "requests": {}
+              },
+              "securityContext": {
+                "enabled": false,
+                "runAsUser": 1001
+              },
+              "service": {
+                "annotations": {
+                  "prometheus.io/port": "{{ .Values.metrics.service.port }}",
+                  "prometheus.io/scrape": "true"
+                },
+                "port": 9113
+              },
+              "serviceMonitor": {
+                "enabled": false,
+                "honorLabels": false,
+                "interval": "",
+                "jobLabel": "",
+                "labels": {},
+                "metricRelabelings": [],
+                "namespace": "",
+                "relabelings": [],
+                "scrapeTimeout": "",
+                "selector": {}
+              }
+            },
+            "nameOverride": "",
+            "namespaceOverride": "",
+            "nodeAffinityPreset": {
+              "key": "",
+              "type": "",
+              "values": []
+            },
+            "nodeSelector": {},
+            "pdb": {
+              "create": false,
+              "maxUnavailable": 0,
+              "minAvailable": 1
+            },
+            "podAffinityPreset": "",
+            "podAnnotations": {},
+            "podAntiAffinityPreset": "soft",
+            "podLabels": {},
+            "podSecurityContext": {
+              "enabled": false,
+              "fsGroup": 1001,
+              "sysctls": []
+            },
+            "priorityClassName": "",
+            "readinessProbe": {
+              "enabled": true,
+              "failureThreshold": 3,
+              "initialDelaySeconds": 5,
+              "periodSeconds": 5,
+              "successThreshold": 1,
+              "timeoutSeconds": 3
+            },
+            "replicaCount": 3,
+            "resources": {
+              "limits": {},
+              "requests": {}
+            },
+            "schedulerName": "",
+            "serverBlock": "",
+            "service": {
+              "annotations": {},
+              "clusterIP": "",
+              "externalTrafficPolicy": "Cluster",
+              "extraPorts": [],
+              "loadBalancerIP": "",
+              "loadBalancerSourceRanges": [],
+              "nodePorts": {
+                "http": "",
+                "https": ""
+              },
+              "ports": {
+                "http": 80,
+                "https": 443
+              },
+              "sessionAffinity": "None",
+              "sessionAffinityConfig": {},
+              "targetPort": {
+                "http": "http",
+                "https": "https"
+              },
+              "type": "LoadBalancer"
+            },
+            "serviceAccount": {
+              "annotations": {},
+              "automountServiceAccountToken": false,
+              "create": false,
+              "name": ""
+            },
+            "sidecarSingleProcessNamespace": false,
+            "sidecars": [],
+            "startupProbe": {
+              "enabled": false,
+              "failureThreshold": 6,
+              "initialDelaySeconds": 30,
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 5
+            },
+            "staticSiteConfigmap": "",
+            "staticSitePVC": "",
+            "terminationGracePeriodSeconds": "",
+            "tolerations": [],
+            "topologySpreadConstraints": [],
+            "updateStrategy": {
+              "rollingUpdate": {},
+              "type": "RollingUpdate"
+            }
+          }
+        }
+      ]
+    capabilities: Basic Install
+    operators.operatorframework.io/builder: operator-sdk-v1.22.2
+    operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
+  name: nginx-operator.v0.0.1
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - kind: Nginx
+      name: nginxes.charts.jkosik
+      version: v1alpha1
+  description: trivial nginx operator
+  displayName: nginx-operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - secrets
+          verbs:
+          - '*'
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+        - apiGroups:
+          - charts.jkosik
+          resources:
+          - nginxes
+          - nginxes/status
+          - nginxes/finalizers
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - authentication.k8s.io
+          resources:
+          - tokenreviews
+          verbs:
+          - create
+        - apiGroups:
+          - authorization.k8s.io
+          resources:
+          - subjectaccessreviews
+          verbs:
+          - create
+        serviceAccountName: nginx-operator-controller-manager
+      deployments:
+      - label:
+          control-plane: controller-manager
+        name: nginx-operator-controller-manager
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              control-plane: controller-manager
+          strategy: {}
+          template:
+            metadata:
+              annotations:
+                kubectl.kubernetes.io/default-container: manager
+              labels:
+                control-plane: controller-manager
+            spec:
+              containers:
+              - args:
+                - --secure-listen-address=0.0.0.0:8443
+                - --upstream=http://127.0.0.1:8080/
+                - --logtostderr=true
+                - --v=0
+                image: gcr.io/kubebuilder/kube-rbac-proxy:v0.11.0
+                name: kube-rbac-proxy
+                ports:
+                - containerPort: 8443
+                  name: https
+                  protocol: TCP
+                resources:
+                  limits:
+                    cpu: 500m
+                    memory: 128Mi
+                  requests:
+                    cpu: 5m
+                    memory: 64Mi
+                securityContext:
+                  allowPrivilegeEscalation: false
+              - args:
+                - --health-probe-bind-address=:8081
+                - --metrics-bind-address=127.0.0.1:8080
+                - --leader-elect
+                - --leader-election-id=nginx-operator
+                image: jkosik/nginx-operator:0.0.1
+                livenessProbe:
+                  httpGet:
+                    path: /healthz
+                    port: 8081
+                  initialDelaySeconds: 15
+                  periodSeconds: 20
+                name: manager
+                readinessProbe:
+                  httpGet:
+                    path: /readyz
+                    port: 8081
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                resources:
+                  limits:
+                    cpu: 500m
+                    memory: 128Mi
+                  requests:
+                    cpu: 10m
+                    memory: 64Mi
+                securityContext:
+                  allowPrivilegeEscalation: false
+              securityContext:
+                runAsNonRoot: true
+              serviceAccountName: nginx-operator-controller-manager
+              terminationGracePeriodSeconds: 10
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - coordination.k8s.io
+          resources:
+          - leases
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        serviceAccountName: nginx-operator-controller-manager
+    strategy: deployment
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - nginx
+  links:
+  - name: Nginx Operator
+    url: https://nginx-operator.domain
+  maturity: alpha
+  provider:
+    name: jkosik
+  version: 0.0.1
