@@ -1,5 +1,5 @@
 ## nginx-operator
-Trivial Helm-based nginx Operator for Kubernetes.
+Trivial Helm-based Nginx Operator for Kubernetes.
 
 ## Controller
 Controllers inside the cluster detect the requested changes and take action to adjust the state. This occurs asynchronously, after you’ve submitted your new manifests.
