@@ -19,7 +19,7 @@ Operators make it easier to install, configure, and maintain the managed softwar
 ## Helm-based Operator
 https://sdk.operatorframework.io/docs/building-operators/helm/tutorial/
 
-- cd /nginx-operator
+- `cd /k8s-nginx-operator`
 
 Using custom Helm Chart:
 - `operator-sdk init --plugins helm --domain jkosik --group webserver --version v1alpha1 --kind Nginx` results in APIVersion `webserver.jkosik/v1alpha1` and Kind Nginx.
@@ -31,10 +31,12 @@ Using existing Helm Chart:
 
 ### Build and Operator's image
 - update `Makefile`:
+```
 -IMG ?= controller:latest
 +IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
+```
 
-- `make docker-build docker-push` => `docker.io/jkosik/nginx-operator:0.0.1`
+- `make docker-build docker-push` => `docker.io/jkosik/k8s-nginx-operator:0.0.1`
 
 ### Deploy Operator
 - Operator can be (1) deployed outside of the cluster, (2) in-cluster as Deployment or (3) using OLM(Operator Lifecycle Manager) using bundles.
@@ -42,21 +44,21 @@ Using existing Helm Chart:
 #### (2) In-cluster deployment
 ```
 ❯ make deploy
-cd config/manager && /Users/juraj/data/github/nginx-operator/bin/kustomize edit set image controller=jkosik/nginx-operator:0.0.1
-/Users/juraj/data/github/nginx-operator/bin/kustomize build config/default | kubectl apply -f -
-namespace/nginx-operator-system created
+cd config/manager && /Users/juraj/data/github/k8s-nginx-operator/bin/kustomize edit set image controller=jkosik/k8s-nginx-operator:0.0.1
+/Users/juraj/data/github/k8s-nginx-operator/bin/kustomize build config/default | kubectl apply -f -
+namespace/k8s-nginx-operator-system created
 customresourcedefinition.apiextensions.k8s.io/nginxes.charts.jkosik created
-serviceaccount/nginx-operator-controller-manager created
-role.rbac.authorization.k8s.io/nginx-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/nginx-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/nginx-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/nginx-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/nginx-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-operator-proxy-rolebinding created
-configmap/nginx-operator-manager-config created
-service/nginx-operator-controller-manager-metrics-service created
-deployment.apps/nginx-operator-controller-manager created
+serviceaccount/k8s-nginx-operator-controller-manager created
+role.rbac.authorization.k8s.io/k8s-nginx-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/k8s-nginx-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/k8s-nginx-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/k8s-nginx-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/k8s-nginx-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/k8s-nginx-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/k8s-nginx-operator-proxy-rolebinding created
+configmap/k8s-nginx-operator-manager-config created
+service/k8s-nginx-operator-controller-manager-metrics-service created
+deployment.apps/k8s-nginx-operator-controller-manager created
 ```
 
 cat <<EOF | kubectl apply -f -
@@ -75,6 +77,6 @@ The Operator Lifecycle Manager (OLM) is a set of cluster resources that manage t
 Important: this guide assumes your project was scaffolded with operator-sdk init --project-version=3.
 
 - `operator-sdk olm install` to install OLM
-- `make bundle bundle-build bundle-push` to build OLM bundle and push to DockeHub => `docker push jkosik/nginx-operator-bundle:v0.0.1`
-- `operator-sdk run bundle example.com/nginx-operator-bundle:v0.0.1` installs the bundle
+- `make bundle bundle-build bundle-push` to build OLM bundle and push to DockeHub => `docker push jkosik/k8s-nginx-operator-bundle:v0.0.1`
+- `operator-sdk run bundle example.com/k8s-nginx-operator-bundle:v0.0.1` installs the bundle
 - Operators DB: https://operatorhub.io/. Operators use OLM to install Operator into the cluster.
